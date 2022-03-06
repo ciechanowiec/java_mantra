@@ -28,7 +28,7 @@ The script is executed according to the following algorithm:
 2.3.1. an absolute path where the project directory is to be created<br/>
 2.3.2. a project name<br/>
 2.4. the provided absolute path where the project directory is to be created is correct<br/>
-2.5. the provided project name is correct (should consist only of lower case alphanumericals and the first character should be a letter)<br/>
+2.5. the provided project name is correct (should consist only of lower case alphanumericals and _ (underscore); the first character should be a letter)<br/>
 2.6. the project directory hasn’t existed yet<br/>
 3\. Create the project directory (name of the project directory is the project name)<br/>
 4\. In the project directory create the following file structure:<br/>

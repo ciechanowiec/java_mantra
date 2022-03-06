@@ -50,9 +50,9 @@ verifyIfCorrectPath () {
 }
 
 verifyIfCorrectName () {
-	if [[ ! "$1" =~ ^[a-z]{1}([a-z0-9]*)$ ]]
+	if [[ ! "$1" =~ ^[a-z]{1}([a-z_0-9]*)$ ]]
 	then
-	        printf "\e[1;91m[ERROR]:\e[0m The provided project name may consist only of lower case alphanumericals and the first character should be a letter. This condition hasn't been met and the script has stopped.\n\n"
+	        printf "\e[1;91m[ERROR]:\e[0m The provided project name may consist only of lower case alphanumericals and _ (underscore); the first character should be a letter. This condition hasn't been met and the script has stopped.\n\n"
 	        exit
 	fi
 }

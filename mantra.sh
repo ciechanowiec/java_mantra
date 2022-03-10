@@ -280,8 +280,8 @@ tryOpenWithVSCode () {
 			elif [ $answer = 'y' ] || [ $answer = 'Y' ]
 			then
 				echo			
-				code -n $projectDirectory	
-				exit
+				code -n $projectDirectory				
+				kill -9 $PPID # Kill the terminal after opening VSCode
 			fi
 		done                              
         fi

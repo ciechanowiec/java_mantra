@@ -123,65 +123,65 @@ cat > $pomFile << EOF
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.$projectName</groupId>
-    <artifactId>$projectName</artifactId>
-    <version>1.0</version>
-    <packaging>jar</packaging>
+  <groupId>com.$projectName</groupId>
+  <artifactId>$projectName</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
 
-    <name>$projectName</name>
-    <description>Java Program</description>
-    <url>https://example.com/</url>
+  <name>$projectName</name>
+  <description>Java Program</description>
+  <url>https://example.com/</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>17</maven.compiler.source>
+      <maven.compiler.target>17</maven.compiler.target>
+  </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
+  <dependencies>
+      <dependency>
           <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-engine</artifactId>
+          <artifactId>junit-jupiter-api</artifactId>
           <version>5.8.2</version>
           <scope>test</scope>
-        </dependency>
-    </dependencies>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.8.2</version>
+        <scope>test</scope>
+      </dependency>
+  </dependencies>
 
-    <build>
-      <plugins>
-        <plugin>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>com.Main</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+      </plugin>
+      <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.2.2</version>
-          <configuration>
-            <archive>
-              <manifest>
-                <addClasspath>true</addClasspath>
-                <mainClass>com.Main</mainClass>
-              </manifest>
-            </archive>
-          </configuration>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
+          <artifactId>maven-failsafe-plugin</artifactId>
           <version>3.0.0-M5</version>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>3.0.0-M5</version>
-        </plugin> 
-      </plugins>
-    </build>
+      </plugin> 
+    </plugins>
+  </build>
 
 </project>
 EOF

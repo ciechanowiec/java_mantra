@@ -65,7 +65,7 @@ The above file structure implements the default file structure used by maven-arc
 10. Add _.gitattributes_ file which normalizes line endings<br/>
 11\. Initialize git repository in the project directory<br/>
 12\. Show finish message on successful project creation<br/>
-13\. Propose to open the project directory in the new window with VS Code if installed<br/>
+13\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed<br/>
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

@@ -290,11 +290,11 @@ showFinishMessage () {
 tryOpenWithVSCode () {
 	projectName=$1
 	projectDirectory=$2	
-	if command code -v &> /dev/null
-        then
+	if command code -v &> /dev/null # Checks whether VSCode CLI command ('code') exists
+  then
 		while true
 		do
-	                printf "\e[1;93m[VSCODE]:\e[0m Open the project \e[3m$projectName\e[0m with VS Code?\ny/n: "
+      printf "\e[1;93m[VSCODE]:\e[0m Open the project \e[3m$projectName\e[0m with VS Code?\ny/n: "
 			read answer
 			if [ $answer = 'n' ] || [ $answer = 'N' ]
 			then
@@ -307,7 +307,31 @@ tryOpenWithVSCode () {
 				kill -9 $PPID # Kill the terminal after opening VSCode
 			fi
 		done                              
-        fi
+  fi
+}
+
+tryOpenWithIntelliJ () {
+	projectName=$1
+	projectDirectory=$2	
+	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether IntelliJ IDEA run script exists
+  then
+    while true
+    do
+      printf "\e[1;93m[INTELLIJ IDEA]:\e[0m Open the project \e[3m$projectName\e[0m with IntelliJ IDEA?\ny/n: "
+      read answer
+      if [ $answer = 'n' ] || [ $answer = 'N' ]
+      then
+        echo
+        exit
+      elif [ $answer = 'y' ] || [ $answer = 'Y' ]
+      then
+        echo			
+        nohup /snap/intellij-idea-community/current/bin/idea.sh $projectDirectory 2>/dev/null &
+        sleep 13 # Let terminal have time to open IntelliJ IDEA
+        kill -9 $PPID # Kill the terminal after opening VSCode
+      fi
+    done                              
+  fi
 }
 
 # ============================================== #
@@ -339,5 +363,6 @@ addGitignore $projectDirectory
 addGitattributes $projectDirectory
 initGit $projectDirectory
 showFinishMessage $projectName
-tryOpenWithVSCode $projectName $projectDirectory
+#tryOpenWithVSCode $projectName $projectDirectory
+#tryOpenWithIntelliJ $projectName $projectDirectory
 echo

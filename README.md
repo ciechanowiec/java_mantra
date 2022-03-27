@@ -32,19 +32,24 @@ The script is executed according to the following algorithm:
 3\. Create the project directory (name of the project directory is the project name)<br/>
 4\. In the project directory create the following file structure:<br/>
 ```
-/home/herman/colibriproject [this line may differ]
+/home/herman/colibriproject
 ├── pom.xml
 ├── README.md
 └── src
     ├── main
-    │   ├── java
-    │   │   └── com
-    │   │       └── Main.java
-    │   └── resources
+    │   ├── java
+    │   │   └── eu
+    │   │       └── ciechanowiec
+    │   │           └── colibriproject
+    │   │               └── Main.java
+    │   └── resources
+    │       └── tinylog.properties
     └── test
         └── java
-            └── com
-                └── MainTest.java
+            └── eu
+                └── ciechanowiec
+                    └── colibriproject
+                        └── MainTest.java
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
 5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!”)<br/>

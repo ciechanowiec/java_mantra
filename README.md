@@ -55,7 +55,7 @@ The above file structure implements the default file structure used by maven-arc
 5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!”)<br/>
 6\. Add default logger properties to (_tinylog.properties_ which logs to a file)
 7\. Add default TestNG-content to _MainTest.java_ (_TestNG_ `assertTrue` test which always passes)<br/>
-8\. Add default Maven-content to _pom.xml_
+8\. Add default Maven-content to _pom.xml_<br/>
 9\. Add default content do _README.md_ (the project name and date of creation)<br/>
 10\. Add _.gitignore_ file which sets git to ignore:<br/>
 10.1. all files with _.class_ extension<br/>
@@ -64,8 +64,9 @@ The above file structure implements the default file structure used by maven-arc
 10.5. all files and directories which names start with _. (dot)_, except _.git_, _.gitattributes_ and _.gitignore_<br/>
 11. Add _.gitattributes_ file which normalizes line endings<br/>
 12\. Initialize git repository in the project directory<br/>
-13\. Show finish message on successful project creation<br/>
-14\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed<br/>
+13\. Set up git committer. 
+14\. Show finish message on successful project creation<br/>
+15\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed (to make this option work restore from the comment an appropriate function in the list of functions run by the script)<br/>
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

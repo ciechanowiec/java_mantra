@@ -344,12 +344,12 @@ initGit () {
 	printf "\e[1;96m[STATUS]:\e[0m Git repository has been initialized.\n"
 }
 
-setupGitCommiter() {
+setupGitCommitter() {
 	currentDirectory=`pwd`
 	cd $1
 	git config user.name "$2 $3"
 	git config user.email $4
-	printf "\e[1;96m[STATUS]:\e[0m Set up git commiter: $2 $3 <$4>.\n"
+	printf "\e[1;96m[STATUS]:\e[0m Set up git committer: $2 $3 <$4>.\n"
 	cd $currentDirectory
 }
 
@@ -416,9 +416,9 @@ verifyIfTreeExists
 verifyIfGitExists
 verifyIfTwoArguments $@
 
-gitCommiterName="Herman"
-gitCommiterSurname="Ciechanowiec"
-gitCommiterEmail="herman@ciechanowiec.eu"
+gitCommitterName="Herman"
+gitCommitterSurname="Ciechanowiec"
+gitCommitterEmail="herman@ciechanowiec.eu"
 
 pathUntilProjectDirectory=$1
 projectName=$2
@@ -438,7 +438,7 @@ insertContentToReadme $projectDirectory $projectName
 addGitignore $projectDirectory
 addGitattributes $projectDirectory
 initGit $projectDirectory
-setupGitCommiter $projectDirectory $gitCommiterName $gitCommiterSurname $gitCommiterEmail
+setupGitCommitter $projectDirectory $gitCommitterName $gitCommitterSurname $gitCommitterEmail
 showFinishMessage $projectName
 #tryOpenWithVSCode $projectName $projectDirectory
 #tryOpenWithIntelliJ $projectName $projectDirectory

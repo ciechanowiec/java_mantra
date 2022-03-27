@@ -72,8 +72,8 @@ The above file structure implements the default file structure used by maven-arc
 ## Aliases
 To make the script work with IntelliJ IDEA and to easily refer to it, appropriate aliases for Bash console are required. The way of setting up those aliases depends on the machine, but in some cases it may be achieved by adding the following code to the hidden file _.bashrc_ located in the home directory:
 ```
-alias mantra='~/mantra/mantra.sh' [location of the mantra script]
-alias idea='nohup /snap/intellij-idea-community/current/bin/idea.sh 2>/dev/null &' [location of the IntelliJ IDEA starter]
+alias mantra='~/mantra/mantra.sh' #location of the mantra script
+alias idea='nohup /snap/intellij-idea-community/current/bin/idea.sh 2>/dev/null &' #location of the IntelliJ IDEA starter
 ```
 
 ## Screenshots

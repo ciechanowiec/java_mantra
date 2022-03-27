@@ -2,7 +2,7 @@
 
 # @author Herman Ciechanowiec, herman@ciechanowiec.eu
 # This program is a Shell script for Linux Ubuntu. Its purpose is to create a 
-# template Java project with Maven, JUnit and Git functionality out of the box.
+# template Java project with basic functionality out of the box.
 # For more information checkout https://github.com/ciechanowiec/mantra
 
 # ============================================== #

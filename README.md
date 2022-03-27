@@ -3,8 +3,9 @@
 ## Table of Contents
 1. [Basic Info](#Basic-Info)
 2. [Script's Algorithm](#Scripts-Algorithm)
-3. [Screenshots](#Screenshots)
-4. [License](#License)
+3. [Aliases]($Aliases)
+4. [Screenshots](#Screenshots)
+5. [License](#License)
 
 ## Basic Info
 This program is a Shell script for Linux Ubuntu. Its purpose is to create a template Java project with Maven, TestNG and Git functionality out of the box.
@@ -67,6 +68,13 @@ The above file structure implements the default file structure used by maven-arc
 13\. Set up git committer. 
 14\. Show finish message on successful project creation<br/>
 15\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed (to make this option work restore from the comment an appropriate function in the list of functions run by the script)<br/>
+
+## Aliases
+To make the script work with IntelliJ IDEA and to easily refer to it, appropriate aliases for Bash console are required. The way of setting up those aliases depends on the machine, but in some cases it may be achieved by adding the following code to the hidden file _.bashrc_ located in the home directory:
+```
+alias mantra='~/mantra/mantra.sh' [location of the mantra script]
+alias idea='nohup /snap/intellij-idea-community/current/bin/idea.sh 2>/dev/null &' [location of the IntelliJ IDEA starter]
+```
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

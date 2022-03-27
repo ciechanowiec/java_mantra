@@ -31,7 +31,7 @@ The script is executed according to the following algorithm:
 2.5. the provided project name is correct (should consist only of lower case alphanumericals and _ (underscore); the first character should be a letter)<br/>
 2.6. the project directory hasn’t existed yet<br/>
 3\. Create the project directory (name of the project directory is the project name)<br/>
-4\. In the project directory create the following file structure:<br/>
+4\. In the project directory create the file structure according to the following template:<br/>
 ```
 /home/herman/colibriproject
 ├── pom.xml

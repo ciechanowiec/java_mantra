@@ -7,13 +7,12 @@
 4. [License](#License)
 
 ## Basic Info
-This program is a Shell script for Linux Ubuntu. Its purpose is to create a template Java project with Maven, JUnit and Git functionality out of the box.
+This program is a Shell script for Linux Ubuntu. Its purpose is to create a template Java project with Maven, TestNG and Git functionality out of the box.
 | Parameter                               | Data                                             |
 | :-------------------------------------: | :----------------------------------------------: |
 | Program name:                           | Mantra                                           |
 | Date of creation:                       | March 2022                                       |
 | Technologies used:                      | Shell, Linux                                     |
-| Time spent to <br/> create the program: | ~1 day                                           |
 | Author:                                 | Herman Ciechanowiec <br/> herman@ciechanowiec.eu |
 | License:                                | MIT No Attribution License                       |
 
@@ -49,23 +48,19 @@ The script is executed according to the following algorithm:
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
 5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!”)<br/>
-6\. Add default JUnit-content to _MainTest.java_ (_JUnit_ `assertTrue` test which always passes)<br/>
-7\. Add default Maven-content to _pom.xml_ which i.a.:<br/>
-7.1. provides basic information about the project (`groupId`, `artifactId`, `version`, `packaging`, `name`, `description`, `url`)<br/>
-7.2. creates _MANIFEST.MF_ which points to the main method<br/>
-7.3. adds _JUnit_ and related testing dependencies<br/>
-7.4. prevents from building if any of tests hasn’t passed<br/>
-8\. Add default content do _README.md_ (the project name and date of creation)<br/>
-9\. Add _.gitignore_ file which sets git to ignore:<br/>
-9.1. all files with _.class_ extension<br/>
-9.2. all files with _.log_ extension<br/>
-9.3. all files and directories named _logs_<br/>
-9.4. _target_ directory located directly in the project directory<br/>
-9.5. all files and directories which names start with _. (dot)_, except _.git_, _.gitattributes_ and _.gitignore_<br/>
-10. Add _.gitattributes_ file which normalizes line endings<br/>
-11\. Initialize git repository in the project directory<br/>
-12\. Show finish message on successful project creation<br/>
-13\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed<br/>
+6\. Add default logger properties to (_tinylog.properties_ which logs to a file)
+7\. Add default TestNG-content to _MainTest.java_ (_TestNG_ `assertTrue` test which always passes)<br/>
+8\. Add default Maven-content to _pom.xml_
+9\. Add default content do _README.md_ (the project name and date of creation)<br/>
+10\. Add _.gitignore_ file which sets git to ignore:<br/>
+10.1. all files with _.class_ extension<br/>
+10.2. all files with _.log_ extension + file named _logs.txt_<br/>
+10.4. _target_ directory located directly in the project directory<br/>
+10.5. all files and directories which names start with _. (dot)_, except _.git_, _.gitattributes_ and _.gitignore_<br/>
+11. Add _.gitattributes_ file which normalizes line endings<br/>
+12\. Initialize git repository in the project directory<br/>
+13\. Show finish message on successful project creation<br/>
+14\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed<br/>
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

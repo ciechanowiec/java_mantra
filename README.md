@@ -54,7 +54,7 @@ The script is executed according to the following algorithm:
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
 5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!” + logging)<br/>
-6\. Add default logger properties to (_tinylog.properties_ which logs to a file)<br/>
+6\. Add default logger properties to _tinylog.properties_ (logging to a file)<br/>
 7\. Add default TestNG-content to _MainTest.java_ (_TestNG_ `assertTrue` test which always passes)<br/>
 8\. Add default Maven-content to _pom.xml_<br/>
 9\. Add default content do _README.md_ (the project name and date of creation)<br/>
@@ -65,7 +65,7 @@ The above file structure implements the default file structure used by maven-arc
 10.5. all files and directories which names start with _. (dot)_, except _.git_, _.gitattributes_ and _.gitignore_<br/>
 11. Add _.gitattributes_ file which normalizes line endings<br/>
 12\. Initialize git repository in the project directory<br/>
-13\. Set up git committer. 
+13\. Set up git committer<br/>
 14\. Show finish message on successful project creation<br/>
 15\. Propose to open the project directory in the new window with VS Code or IntelliJ IDEA if installed (to make this option work restore from the comment an appropriate function in the list of functions run by the script)<br/>
 

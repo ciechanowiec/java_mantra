@@ -71,9 +71,10 @@ createProjectDirectory () {
 }
 
 createFileStructure () {
-	mkdir -p $1/src/{main/{java/com,resources},test/java/com}
-	touch $1/src/main/java/com/Main.java
-	touch $1/src/test/java/com/MainTest.java
+	mkdir -p $1/src/{main/{java/eu/ciechanowiec/$2,resources},test/java/eu/ciechanowiec/$2}
+	touch $1/src/main/java/eu/ciechanowiec/$2/Main.java
+	touch $1/src/main/resources/tinylog.properties
+	touch $1/src/test/java/eu/ciechanowiec/$2/MainTest.java
 	touch $1/pom.xml
 	touch $1/README.md
 	printf "\e[1;96m[STATUS]:\e[0m The following file structure for the project has been created:\n"
@@ -81,28 +82,42 @@ createFileStructure () {
 }
 
 insertContentToMain () {
-mainFile=$1/src/main/java/com/Main.java
+mainFile=$1/src/main/java/eu/ciechanowiec/$2/Main.java
 cat > $mainFile << EOF
-package com;
+package eu.ciechanowiec.$2;
+
+import org.tinylog.Logger;
 
 public class Main {
 
     public static void main(String[] args) {
+        Logger.info("Application started.");
         System.out.println("Hello, Universe!");
+        Logger.info("Application ended.");
     }
-}	
+}		
 EOF
 printf "\e[1;96m[STATUS]:\e[0m Default Java-content has been added to \e[3mMain.java\e[0m.\n" 
 }
 
+insertContentToLoggerProperties () {
+loggerPropertiesFile=$1/src/main/resources/tinylog.properties
+cat > $loggerPropertiesFile << EOF
+writer        = file
+writer.format = {date: yyyy-MM-dd HH:mm:ss.SSS O} {level}: {message}
+writer.file   = logs.txt	
+EOF
+printf "\e[1;96m[STATUS]:\e[0m Default logger properties has been added to \e[3mtinylog.properties\e[0m.\n" 
+}
+
 insertContentToMainTest () {
-mainTestFile=$1/src/test/java/com/MainTest.java
+mainTestFile=$1/src/test/java/eu/ciechanowiec/$2/MainTest.java
 cat > $mainTestFile << EOF
-package com;
+package eu.ciechanowiec.$2;
 
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.Assert.assertTrue;
 
 public class MainTest {
 
@@ -112,7 +127,7 @@ public class MainTest {
     }
 }
 EOF
-printf "\e[1;96m[STATUS]:\e[0m Default JUnit-content has been added to \e[3mMainTest.java\e[0m.\n"	
+printf "\e[1;96m[STATUS]:\e[0m Default TestNG-content has been added to \e[3mMainTest.java\e[0m.\n"	
 }
 
 insertContentToPom () {
@@ -125,14 +140,14 @@ cat > $pomFile << EOF
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.$projectName</groupId>
+  <groupId>eu.ciechanowiec.$projectName</groupId>
   <artifactId>$projectName</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>$projectName</name>
   <description>Java Program</description>
-  <url>https://example.com/</url>
+  <url>https://ciechanowiec.eu/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -140,18 +155,22 @@ cat > $pomFile << EOF
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
-  <dependencies>  
+  <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-api</artifactId>
+      <version>2.5.0-M1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.tinylog</groupId>
+      <artifactId>tinylog-impl</artifactId>
+      <version>2.5.0-M1.1</version>
     </dependency>
   </dependencies>
 
@@ -169,11 +188,11 @@ cat > $pomFile << EOF
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/target/src/main/resources</outputDirectory>
+              <outputDirectory>/target/src/main/resources</outputDirectory>
               <includeEmptyDirs>true</includeEmptyDirs>
               <resources>
                 <resource>
-                  <directory>${basedir}/src/main/resources</directory>
+                  <directory>/src/main/resources</directory>
                   <filtering>false</filtering>
                 </resource>
               </resources>
@@ -189,21 +208,65 @@ cat > $pomFile << EOF
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.Main</mainClass>
+	          <classpathPrefix>lib/</classpathPrefix> <!-- enables usage of dependencies from .jar
+                                                           by copying them into the target folder -->
+              <mainClass>eu.ciechanowiec.$projectName.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
       </plugin>
       <plugin>
+        <!-- enables usage of dependencies from .jar
+             by copying them into the target folder -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>\${project.build.directory}/lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <!-- prevents from building if unit tests don't pass -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M5</version>
       </plugin>
       <plugin>
+        <!-- prevents from building if integration tests don't pass -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>3.0.0-M5</version>
-      </plugin> 
+      </plugin>
+      <plugin>
+        <!-- creates reports on tests coverage (target->site->jacoco->index.html) -->
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.7</version>
+        <executions>
+          <execution>
+            <id>prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
@@ -230,9 +293,9 @@ cat > $gitignoreFile << EOF
 # All files with .class extension:
 *.class
 
-# All files with .log extension + all files and directories named 'logs':
+# All files with .log extension + file named 'logs.txt':
 *.log
-**/logs
+logs.txt
 
 # 'target' directory located directly in the project directory:
 /target
@@ -246,8 +309,7 @@ cat > $gitignoreFile << EOF
 EOF
 printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitignore\e[0m has been created. It sets git to ignore:
 	   \055 all files with \e[3m.class\e[0m extension
-	   \055 all files with \e[3m.log\e[0m extension
-	   \055 all files and directories named \e[3mlogs\e[0m
+	   \055 all files with \e[3m.log\e[0m extension + file named \e[3mlogs.txt\e[0m
 	   \055 \e[3mtarget\e[0m directory located directly in the project directory
 	   \055 all files and directories which names start with \e[3m. (dot)\e[0m,
 	     except \e[3m.git\e[0m, \e[3m.gitattributes\e[0m and \e[3m.gitignore\e[0m\n"
@@ -348,15 +410,16 @@ verifyIfTwoArguments $@
 pathUntilProjectDirectory=$1
 projectName=$2
 projectDirectory=$1/$2
-projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'`
+projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'` #replaces possible double // with single /
 
 verifyIfCorrectPath $pathUntilProjectDirectory
 verifyIfCorrectName $projectName
 verifyIfProjectDirectoryExists $projectDirectory
 createProjectDirectory $projectDirectory
-createFileStructure $projectDirectory
-insertContentToMain $projectDirectory
-insertContentToMainTest $projectDirectory
+createFileStructure $projectDirectory $projectName
+insertContentToMain $projectDirectory $projectName
+insertContentToLoggerProperties $projectDirectory
+insertContentToMainTest $projectDirectory $projectName
 insertContentToPom $projectDirectory $projectName
 insertContentToReadme $projectDirectory $projectName
 addGitignore $projectDirectory
@@ -364,5 +427,5 @@ addGitattributes $projectDirectory
 initGit $projectDirectory
 showFinishMessage $projectName
 #tryOpenWithVSCode $projectName $projectDirectory
-#tryOpenWithIntelliJ $projectName $projectDirectory
+tryOpenWithIntelliJ $projectName $projectDirectory
 echo

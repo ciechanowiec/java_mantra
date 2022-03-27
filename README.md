@@ -52,8 +52,8 @@ The script is executed according to the following algorithm:
                         └── MainTest.java
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
-5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!”)<br/>
-6\. Add default logger properties to (_tinylog.properties_ which logs to a file)
+5\. Add default Java-content to _Main.java_ (`main` method which prints “Hello, Universe!” + logging)<br/>
+6\. Add default logger properties to (_tinylog.properties_ which logs to a file)<br/>
 7\. Add default TestNG-content to _MainTest.java_ (_TestNG_ `assertTrue` test which always passes)<br/>
 8\. Add default Maven-content to _pom.xml_<br/>
 9\. Add default content do _README.md_ (the project name and date of creation)<br/>

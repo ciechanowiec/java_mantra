@@ -349,7 +349,7 @@ setupGitCommitter() {
 	cd $1
 	git config user.name "$2 $3"
 	git config user.email $4
-	printf "\e[1;96m[STATUS]:\e[0m Set up git committer: $2 $3 <$4>.\n"
+	printf "\e[1;96m[STATUS]:\e[0m Git committer fot this project has been set up: $2 $3 <$4>.\n"
 	cd $currentDirectory
 }
 

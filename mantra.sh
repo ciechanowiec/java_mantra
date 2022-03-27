@@ -344,14 +344,23 @@ initGit () {
 	printf "\e[1;96m[STATUS]:\e[0m Git repository has been initialized.\n"
 }
 
-showFinishMessage () {	
+setupGitCommiter() {
+	currentDirectory=`pwd`
+	cd $1
+	git config user.name "$2 $3"
+	git config user.email $4
+	printf "\e[1;96m[STATUS]:\e[0m Set up git commiter: $2 $3 <$4>.\n"
+	cd $currentDirectory
+}
+
+showFinishMessage () {
 	projectName=$1
 	printf "\e[1;92m[SUCCESS]:\e[0m The project \e[3m$projectName\e[0m has been created.\n"
 }
 
 tryOpenWithVSCode () {
 	projectName=$1
-	projectDirectory=$2	
+	projectDirectory=$2
 	if command code -v &> /dev/null # Checks whether VSCode CLI command ('code') exists
   then
 		while true
@@ -364,17 +373,17 @@ tryOpenWithVSCode () {
 				exit
 			elif [ $answer = 'y' ] || [ $answer = 'Y' ]
 			then
-				echo			
-				code -n $projectDirectory				
+				echo
+				code -n $projectDirectory
 				kill -9 $PPID # Kill the terminal after opening VSCode
 			fi
-		done                              
+		done
   fi
 }
 
 tryOpenWithIntelliJ () {
 	projectName=$1
-	projectDirectory=$2	
+	projectDirectory=$2
 	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether IntelliJ IDEA run script exists
   then
     while true
@@ -387,12 +396,12 @@ tryOpenWithIntelliJ () {
         exit
       elif [ $answer = 'y' ] || [ $answer = 'Y' ]
       then
-        echo			
+        echo
         nohup /snap/intellij-idea-community/current/bin/idea.sh $projectDirectory 2>/dev/null &
         sleep 13 # Let terminal have time to open IntelliJ IDEA
         kill -9 $PPID # Kill the terminal after opening VSCode
       fi
-    done                              
+    done
   fi
 }
 
@@ -406,6 +415,10 @@ showWelcomeMessage
 verifyIfTreeExists
 verifyIfGitExists
 verifyIfTwoArguments $@
+
+gitCommiterName="Herman"
+gitCommiterSurname="Ciechanowiec"
+gitCommiterEmail="herman@ciechanowiec.eu"
 
 pathUntilProjectDirectory=$1
 projectName=$2
@@ -425,7 +438,8 @@ insertContentToReadme $projectDirectory $projectName
 addGitignore $projectDirectory
 addGitattributes $projectDirectory
 initGit $projectDirectory
+setupGitCommiter $projectDirectory $gitCommiterName $gitCommiterSurname $gitCommiterEmail
 showFinishMessage $projectName
 #tryOpenWithVSCode $projectName $projectDirectory
-tryOpenWithIntelliJ $projectName $projectDirectory
+#tryOpenWithIntelliJ $projectName $projectDirectory
 echo

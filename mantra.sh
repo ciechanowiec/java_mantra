@@ -88,7 +88,10 @@ package eu.ciechanowiec.$2;
 
 import org.tinylog.Logger;
 
-public class Main {
+/**
+ * @author $3 $4
+ * */
+class Main {
 
     public static void main(String[] args) {
         Logger.info("Application started.");
@@ -430,7 +433,7 @@ verifyIfCorrectName $projectName
 verifyIfProjectDirectoryExists $projectDirectory
 createProjectDirectory $projectDirectory
 createFileStructure $projectDirectory $projectName
-insertContentToMain $projectDirectory $projectName
+insertContentToMain $projectDirectory $projectName $gitCommitterName $gitCommitterSurname
 insertContentToLoggerProperties $projectDirectory
 insertContentToMainTest $projectDirectory $projectName
 insertContentToPom $projectDirectory $projectName

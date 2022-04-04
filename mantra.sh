@@ -90,7 +90,7 @@ import org.tinylog.Logger;
 
 /**
  * @author $3 $4
- * */
+ */
 class Main {
 
     public static void main(String[] args) {

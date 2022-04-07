@@ -13,7 +13,7 @@ This program is a Shell script for Linux Ubuntu. Its purpose is to create a temp
 | :-------------------------------------: | :----------------------------------------------: |
 | Program name:                           | Mantra                                           |
 | Date of creation:                       | March 2022                                       |
-| Technologies used:                      | Shell, Linux                                     |
+| Technologies used:                      | Shell, Linux Ubuntu                              |
 | Author:                                 | Herman Ciechanowiec <br/> herman@ciechanowiec.eu |
 | License:                                | MIT No Attribution License                       |
 

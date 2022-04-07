@@ -155,24 +155,34 @@ cat > $pomFile << EOF
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
+    <testng.version>7.5</testng.version>
+    <tinylog-api.version>2.5.0-M1.1</tinylog-api.version>
+    <tinylog-impl.version>2.5.0-M1.1</tinylog-impl.version>
+    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+    <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+    <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.5</version>
+      <version>\${testng.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.tinylog</groupId>
       <artifactId>tinylog-api</artifactId>
-      <version>2.5.0-M1.1</version>
+      <version>\${tinylog-api.version}</version>
     </dependency>
     <dependency>
       <groupId>org.tinylog</groupId>
       <artifactId>tinylog-impl</artifactId>
-      <version>2.5.0-M1.1</version>
+      <version>\${tinylog-impl.version}</version>
     </dependency>
   </dependencies>
 
@@ -181,12 +191,12 @@ cat > $pomFile << EOF
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.10.1</version>
+        <version>\${maven-compiler-plugin.version}</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>\${maven-resources-plugin.version}</version>
         <executions>
           <execution>
             <id>copy-resources</id>
@@ -210,7 +220,7 @@ cat > $pomFile << EOF
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.2</version>
+        <version>\${maven-jar-plugin.version}</version>
         <configuration>
           <archive>
             <manifest>
@@ -227,7 +237,7 @@ cat > $pomFile << EOF
              by copying them into the target folder -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.3.0</version>
+        <version>\${maven-dependency-plugin.version}</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -245,19 +255,19 @@ cat > $pomFile << EOF
         <!-- prevents from building if unit tests don't pass -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>\${maven-surefire-plugin.version}</version>
       </plugin>
       <plugin>
         <!-- prevents from building if integration tests don't pass -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <version>${maven-failsafe-plugin.version}</version>
       </plugin>
       <plugin>
         <!-- creates reports on tests coverage (target->site->jacoco->index.html) -->
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.7</version>
+        <version>\${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
             <id>prepare-agent</id>

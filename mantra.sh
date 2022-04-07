@@ -416,7 +416,7 @@ tryOpenWithIntelliJ () {
         echo
         nohup /snap/intellij-idea-community/current/bin/idea.sh $projectDirectory 2>/dev/null &
         sleep 13 # Let terminal have time to open IntelliJ IDEA
-        kill -9 $PPID # Kill the terminal after opening VSCode
+        kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA
       fi
     done
   fi

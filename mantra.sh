@@ -163,7 +163,8 @@ cat > $pomFile << EOF
     <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
     <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+    <maven-
+    safe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
     <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
   </properties>
 
@@ -261,7 +262,7 @@ cat > $pomFile << EOF
         <!-- prevents from building if integration tests don't pass -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-failsafe-plugin.version}</version>
+        <version>\${maven-failsafe-plugin.version}</version>
       </plugin>
       <plugin>
         <!-- creates reports on tests coverage (target->site->jacoco->index.html) -->

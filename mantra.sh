@@ -401,7 +401,7 @@ tryOpenWithVSCode () {
 tryOpenWithIntelliJ () {
 	projectName=$1
 	projectDirectory=$2
-	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether IntelliJ IDEA run script exists
+	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether IntelliJ IDEA native run script exists
   then
     while true
     do

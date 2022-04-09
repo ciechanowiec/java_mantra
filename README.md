@@ -9,7 +9,7 @@
 6. [License](#License)
 
 ## Basic Info
-This program is a Shell script for Linux Ubuntu. Its purpose is to provide an easy-to-use and convenient tool for creating a Java project from a template with basic dependencies and configuration out of the box (Maven, Git, TestNG etc.).
+This program is a Shell script for Linux Ubuntu. Its purpose is to provide an easy-to-use and convenient tool for creating clean Java projects with basic dependencies and configuration out of the box (Maven, Git, TestNG etc.).
 | Parameter             | Data                                             |
 | :-------------------: | :----------------------------------------------: |
 | Program name:         | Mantra                                           |
@@ -82,7 +82,7 @@ The above file structure implements the default file structure used by maven-arc
 ## How to Use
 1. Make sure that prerequisites listed above are installed
 2. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks
-3. Put the script file (`.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
+3. Put the script (file `.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
 4. Give the script a permission to be run (`chmod 755 ~/.mantra.sh`)
 5. Set up the following alias for the terminal (on Linux Ubuntu aliases are usually specified in the hidden file `~/.bashrc`):<br>
    `alias mantra='~/.mantra.sh'`

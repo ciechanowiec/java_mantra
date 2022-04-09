@@ -22,22 +22,22 @@ verifyIfTreeExists () {
 	if ! command tree -v &> /dev/null
 	then
 		printf "\e[1;91m[ERROR]:\e[0m 'tree' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'tree' package using command 'sudo apt install tree'.\n\n"
-        	exit
+    		exit
 	fi
 }
 
 verifyIfGitExists () {
-  if ! command git --version &> /dev/null
-  then
-          printf "\e[1;91m[ERROR]:\e[0m 'git' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'git' package using command 'sudo apt install git'.\n\n"
-          exit
-  fi
+	if ! command git --version &> /dev/null
+	then
+		printf "\e[1;91m[ERROR]:\e[0m 'git' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'git' package using command 'sudo apt install git'.\n\n"
+		exit
+	fi
 }
 
 verifyIfTwoArguments () {	
 	if [ $# != 2 ]
 	then
-	        printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly two arguments. The first one should be an absolute path where the project directory is to be created and the second one should be the project name. This condition hasn't been met and the script has stopped.\n\n"
+		printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly two arguments. The first one should be an absolute path where the project directory is to be created and the second one should be the project name. This condition hasn't been met and the script has stopped.\n\n"
 		exit
 	fi
 }
@@ -45,7 +45,7 @@ verifyIfTwoArguments () {
 verifyIfOneArgument () {
 	if [ $# != 1 ]
 	then
-	        printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly one argument: the project name. This condition hasn't been met and the script has stopped.\n\n"
+    		printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly one argument: the project name. This condition hasn't been met and the script has stopped.\n\n"
 		exit
 	fi
 }
@@ -54,8 +54,8 @@ verifyIfCorrectPath () {
 pathUntilProjectDirectory=$1
 	if [[ ! "$pathUntilProjectDirectory" =~ ^\/.* ]]
 	then
-        	printf "\e[1;91m[ERROR]:\e[0m As the first argument for the script an absolute path where the project directory is to be created should be provided. This condition hasn't been met and the script has stopped.\n\n"
-	        exit
+		printf "\e[1;91m[ERROR]:\e[0m As the first argument for the script an absolute path where the project directory is to be created should be provided. This condition hasn't been met and the script has stopped.\n\n"
+		exit
 	fi
 }
 
@@ -63,18 +63,18 @@ verifyIfCorrectName () {
 projectName=$1
 	if [[ ! "$projectName" =~ ^[a-z]{1}([a-z0-9]*)$ ]]
 	then
-	        printf "\e[1;91m[ERROR]:\e[0m The provided project name may consist only of lower case letters and numbers; the first character should be a letter. This condition hasn't been met and the script has stopped.\n\n"
-	        exit
+		printf "\e[1;91m[ERROR]:\e[0m The provided project name may consist only of lower case letters and numbers; the first character should be a letter. This condition hasn't been met and the script has stopped.\n\n"
+		exit
 	fi
 }
 
 verifyIfProjectDirectoryExists () {
 projectDirectory=$1
-  if [ -d $projectDirectory ]
-  then
-    printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$projectDirectory\e[0m. The script has stopped.\n\n"
+	if [ -d $projectDirectory ]
+	then
+		printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$projectDirectory\e[0m. The script has stopped.\n\n"
 		exit
-  fi
+	fi
 }
 
 createProjectDirectory () {
@@ -395,10 +395,10 @@ initGit () {
 }
 
 setupGitCommitter() {
-  projectDirectory=$1
-  gitCommitterName=$2
-  gitCommitterSurname=$3
-  gitCommitterEmail=$4
+	projectDirectory=$1
+	gitCommitterName=$2
+	gitCommitterSurname=$3
+	gitCommitterEmail=$4
 	currentDirectory=`pwd`
 	cd $projectDirectory
 	git config user.name "$gitCommitterName $gitCommitterSurname"
@@ -416,24 +416,24 @@ tryOpenWithVSCode () {
 	projectName=$1
 	projectDirectory=$2
 	if command code -v &> /dev/null # Checks whether VS Code CLI command ('code') exists
-  then
-				printf "\e[1;93m[VS Code]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
-				code -n $projectDirectory
-				sleep 13      # Let the terminal have time to open VS Code
-        kill -9 $PPID # Kill the terminal after opening VS Code
-  fi
+	then
+		printf "\e[1;93m[VS Code]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
+		code -n $projectDirectory
+		sleep 13      # Let the terminal have time to open VS Code
+		kill -9 $PPID # Kill the terminal after opening VS Code
+	fi
 }
 
 tryOpenWithIntelliJ () {
 	projectName=$1
 	projectDirectory=$2
 	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
-  then
-        printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
-        nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
-        sleep 60      # Let the terminal have time to open IntelliJ IDEA Community
-        kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA Community
-  fi
+	then
+		printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
+		nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
+		sleep 13      # Let the terminal have time to open IntelliJ IDEA Community
+		kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA Community
+	fi
 }
 
 # ============================================== #
@@ -505,8 +505,9 @@ showFinishMessage $projectName
 # B. By default the described options are disabled by commenting out
 #    the functions 'tryOpenWithIntelliJ' and 'tryOpenWithVSCode'. To enable one
 #    of that options restore an appropriate function from the comment.
-tryOpenWithIntelliJ $projectName $projectDirectory
+#tryOpenWithIntelliJ $projectName $projectDirectory
 #tryOpenWithVSCode $projectName $projectDirectory
 # << END OF A CONFIGURABLE BLOCK
 
 echo
+

@@ -390,7 +390,7 @@ printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitattributes\e[0m has been created. It set
 
 initGit () {
 	projectDirectory=$1
-	git init $projectDirectory > /dev/null
+	git init $projectDirectory &> /dev/null
 	printf "\e[1;96m[STATUS]:\e[0m Git repository has been initialized.\n"
 }
 

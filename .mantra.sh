@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # @author Herman Ciechanowiec, herman@ciechanowiec.eu
-# This program is a Shell script for Linux Ubuntu. Its purpose is to create a 
-# template Java project with basic functionality out of the box.
+# This program is a Shell script for Linux Ubuntu. Its purpose is to provide
+# an easy-to-use and convenient tool for creating a Java project from a template
+# with basic dependencies and configuration out of the box (Maven, Git, TestNG etc.).
 # For more information checkout https://github.com/ciechanowiec/mantra
 
 # ============================================== #
@@ -20,29 +21,38 @@ showWelcomeMessage () {
 verifyIfTreeExists () {
 	if ! command tree -v &> /dev/null
 	then
-		printf "\e[1;91m[ERROR]:\e[0m 'tree' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'tree' package using command 'sudo apt-get install tree'.\n\n"
+		printf "\e[1;91m[ERROR]:\e[0m 'tree' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'tree' package using command 'sudo apt install tree'.\n\n"
         	exit
 	fi
 }
 
 verifyIfGitExists () {
-        if ! command git --version &> /dev/null
-        then
-                printf "\e[1;91m[ERROR]:\e[0m 'git' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'git' package using command 'sudo apt-get install git'.\n\n"
-                exit
-        fi
+  if ! command git --version &> /dev/null
+  then
+          printf "\e[1;91m[ERROR]:\e[0m 'git' package which is needed to run the script hasn't been detected and the script has stopped. Try to install 'git' package using command 'sudo apt install git'.\n\n"
+          exit
+  fi
 }
 
 verifyIfTwoArguments () {	
 	if [ $# != 2 ]
 	then
-	        printf "\e[1;91m[ERROR]:\e[0m The script must be provided with two arguments. The first one should be an absolute path where the project directory is to be created and the second one should be the project name. This condition hasn't been met and the script has stopped.\n\n"
+	        printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly two arguments. The first one should be an absolute path where the project directory is to be created and the second one should be the project name. This condition hasn't been met and the script has stopped.\n\n"
+		exit
+	fi
+}
+
+verifyIfOneArgument () {
+	if [ $# != 1 ]
+	then
+	        printf "\e[1;91m[ERROR]:\e[0m The script must be provided with exactly one argument: the project name. This condition hasn't been met and the script has stopped.\n\n"
 		exit
 	fi
 }
 
 verifyIfCorrectPath () {
-	if [[ ! "$1" =~ ^\/.* ]]
+pathUntilProjectDirectory=$1
+	if [[ ! "$pathUntilProjectDirectory" =~ ^\/.* ]]
 	then
         	printf "\e[1;91m[ERROR]:\e[0m As the first argument for the script an absolute path where the project directory is to be created should be provided. This condition hasn't been met and the script has stopped.\n\n"
 	        exit
@@ -50,7 +60,8 @@ verifyIfCorrectPath () {
 }
 
 verifyIfCorrectName () {
-	if [[ ! "$1" =~ ^[a-z]{1}([a-z0-9]*)$ ]]
+projectName=$1
+	if [[ ! "$projectName" =~ ^[a-z]{1}([a-z0-9]*)$ ]]
 	then
 	        printf "\e[1;91m[ERROR]:\e[0m The provided project name may consist only of lower case letters and numbers; the first character should be a letter. This condition hasn't been met and the script has stopped.\n\n"
 	        exit
@@ -58,16 +69,18 @@ verifyIfCorrectName () {
 }
 
 verifyIfProjectDirectoryExists () {
-        if [ -d $1 ]
-        then
-                printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$1\e[0m. The script has stopped.\n\n"
+projectDirectory=$1
+  if [ -d $projectDirectory ]
+  then
+    printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$1\e[0m. The script has stopped.\n\n"
 		exit
-        fi
+  fi
 }
 
 createProjectDirectory () {
-	mkdir -p $1
-	printf "\e[1;96m[STATUS]:\e[0m The project directory \e[3m$1\e[0m has been created.\n"
+projectDirectory=$1
+	mkdir -p $projectDirectory
+	printf "\e[1;96m[STATUS]:\e[0m The project directory \e[3m$projectDirectory\e[0m has been created.\n"
 }
 
 createFileStructure () {
@@ -378,47 +391,24 @@ showFinishMessage () {
 tryOpenWithVSCode () {
 	projectName=$1
 	projectDirectory=$2
-	if command code -v &> /dev/null # Checks whether VSCode CLI command ('code') exists
+	if command code -v &> /dev/null # Checks whether VS Code CLI command ('code') exists
   then
-		while true
-		do
-      printf "\e[1;93m[VSCODE]:\e[0m Open the project \e[3m$projectName\e[0m with VS Code?\ny/n: "
-			read answer
-			if [ $answer = 'n' ] || [ $answer = 'N' ]
-			then
-				echo
-				exit
-			elif [ $answer = 'y' ] || [ $answer = 'Y' ]
-			then
-				echo
+				printf "\e[1;93m[VS Code]:\e[0m Opening the project. The terminal will be automatically closed in a moment.\n"
 				code -n $projectDirectory
-				kill -9 $PPID # Kill the terminal after opening VSCode
-			fi
-		done
+				sleep 13      # Let the terminal have time to open VS Code
+        kill -9 $PPID # Kill the terminal after opening VS Code
   fi
 }
 
 tryOpenWithIntelliJ () {
 	projectName=$1
 	projectDirectory=$2
-	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether IntelliJ IDEA native run script exists
+	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
   then
-    while true
-    do
-      printf "\e[1;93m[INTELLIJ IDEA]:\e[0m Open the project \e[3m$projectName\e[0m with IntelliJ IDEA?\ny/n: "
-      read answer
-      if [ $answer = 'n' ] || [ $answer = 'N' ]
-      then
-        echo
-        exit
-      elif [ $answer = 'y' ] || [ $answer = 'Y' ]
-      then
-        echo
-        nohup /snap/intellij-idea-community/current/bin/idea.sh $projectDirectory 2>/dev/null &
-        sleep 13 # Let terminal have time to open IntelliJ IDEA
-        kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA
-      fi
-    done
+        printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project. The terminal will be automatically closed in a moment.\n"
+        nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
+        sleep 13      # Let the terminal have time to open IntelliJ IDEA Community
+        kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA Community
   fi
 }
 
@@ -431,16 +421,39 @@ tryOpenWithIntelliJ () {
 showWelcomeMessage
 verifyIfTreeExists
 verifyIfGitExists
-verifyIfTwoArguments $@
 
+# >> START OF A CONFIGURABLE BLOCK
 gitCommitterName="Herman"
 gitCommitterSurname="Ciechanowiec"
 gitCommitterEmail="herman@ciechanowiec.eu"
+# << END OF A CONFIGURABLE BLOCK
 
-pathUntilProjectDirectory=$1
-projectName=$2
-projectDirectory=$1/$2
-projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'` #replaces possible double // with single /
+# >> START OF A CONFIGURABLE BLOCK
+# A. This block allows to configure how many arguments are
+#    required to be passed to the script.
+# B. The first set of functions requires exactly two arguments:
+#    - an absolute path where the project directory is to be created
+#    - a project name
+# C. The second set of functions requires exactly one argument: a project name.
+#    In the second set of functions an absolute path where the project directory
+#    is to be created isn't passed to the script, but is hardcoded inside it.
+# D. By default the first set of functions is active while the second set is inactive
+#    and commented out. To switch between them comment out the first one, restore
+#    from the comment the second one and provide your own value for the variable
+#    'pathUntilProjectDirectory' inside that second set.
+# FIRST SET:
+#verifyIfTwoArguments $@
+#pathUntilProjectDirectory=$1
+#projectName=$2
+#projectDirectory=$1/$2
+# SECOND SET:
+verifyIfOneArgument $@
+pathUntilProjectDirectory="/home/herman/MyDrive/2_prog/" # change the value of this variable
+projectName=$1
+projectDirectory=$pathUntilProjectDirectory/$1
+# << END OF A CONFIGURABLE BLOCK
+
+projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'` # replace possible double // with single /
 
 verifyIfCorrectPath $pathUntilProjectDirectory
 verifyIfCorrectName $projectName
@@ -457,6 +470,16 @@ addGitattributes $projectDirectory
 initGit $projectDirectory
 setupGitCommitter $projectDirectory $gitCommitterName $gitCommitterSurname $gitCommitterEmail
 showFinishMessage $projectName
+
+# >> START OF A CONFIGURABLE BLOCK
+# A. This block allows to open the project directory in the new
+#    window with IntelliJ IDEA Community ('tryOpenWithIntelliJ')
+#    or Visual Studio Code ('tryOpenWithVSCode') if installed.
+# B. By default the described options are disabled by commenting out
+#    the functions 'tryOpenWithIntelliJ' and 'tryOpenWithVSCode'. To enable one
+#    of that options restore an appropriate function from the comment.
+tryOpenWithIntelliJ $projectName $projectDirectory
 #tryOpenWithVSCode $projectName $projectDirectory
-#tryOpenWithIntelliJ $projectName $projectDirectory
+# << END OF A CONFIGURABLE BLOCK
+
 echo

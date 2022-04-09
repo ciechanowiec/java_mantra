@@ -2,8 +2,8 @@
 
 # @author Herman Ciechanowiec, herman@ciechanowiec.eu
 # This program is a Shell script for Linux Ubuntu. Its purpose is to provide
-# an easy-to-use and convenient tool for creating a Java project from a template
-# with basic dependencies and configuration out of the box (Maven, Git, TestNG etc.).
+# an easy-to-use and convenient tool for creating clean Java projects with basic
+# dependencies and configuration out of the box (Maven, Git, TestNG etc.).
 # For more information checkout https://github.com/ciechanowiec/mantra
 
 # ============================================== #

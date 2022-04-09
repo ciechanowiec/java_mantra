@@ -14,7 +14,7 @@ This program is a Shell script for Linux Ubuntu. Its purpose is to provide an ea
 | :-------------------: | :----------------------------------------------: |
 | Program name:         | Mantra                                           |
 | Date of creation:     | March 2022                                       |
-| Technologies used:    | Shell, Linux Ubuntu                              |
+| Technologies used:    | Shell, Linux Ubuntu,<br/> Maven                  |
 | Author:               | Herman Ciechanowiec <br/> herman@ciechanowiec.eu |
 | License:              | MIT No Attribution License                       |
 

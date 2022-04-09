@@ -72,7 +72,7 @@ verifyIfProjectDirectoryExists () {
 projectDirectory=$1
   if [ -d $projectDirectory ]
   then
-    printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$1\e[0m. The script has stopped.\n\n"
+    printf "\e[1;91m[ERROR]:\e[0m The project already exists in \e[3m$projectDirectory\e[0m. The script has stopped.\n\n"
 		exit
   fi
 }
@@ -83,11 +83,15 @@ projectDirectory=$1
 	printf "\e[1;96m[STATUS]:\e[0m The project directory \e[3m$projectDirectory\e[0m has been created.\n"
 }
 
-createFileStructure () {
-	mkdir -p $1/src/{main/{java/eu/ciechanowiec/$2,resources},test/java/eu/ciechanowiec/$2}
-	touch $1/src/main/java/eu/ciechanowiec/$2/Main.java
+createFilesStructure () {
+projectDirectory=$1
+firstLevelPackageName=$2
+secondLevelPackageName=$3
+projectName=$4
+	mkdir -p $1/src/{main/{java/$firstLevelPackageName/$secondLevelPackageName/$projectName,resources},test/java/$firstLevelPackageName/$secondLevelPackageName/$projectName}
+	touch $1/src/main/java/$firstLevelPackageName/$secondLevelPackageName/$projectName/Main.java
 	touch $1/src/main/resources/tinylog.properties
-	touch $1/src/test/java/eu/ciechanowiec/$2/MainTest.java
+	touch $1/src/test/java/$firstLevelPackageName/$secondLevelPackageName/$projectName/MainTest.java
 	touch $1/pom.xml
 	touch $1/README.md
 	printf "\e[1;96m[STATUS]:\e[0m The following file structure for the project has been created:\n"
@@ -95,14 +99,20 @@ createFileStructure () {
 }
 
 insertContentToMain () {
-mainFile=$1/src/main/java/eu/ciechanowiec/$2/Main.java
+projectDirectory=$1
+firstLevelPackageName=$2
+secondLevelPackageName=$3
+projectName=$4
+gitCommitterName=$5
+gitCommitterSurname=$6
+mainFile=$projectDirectory/src/main/java/$firstLevelPackageName/$secondLevelPackageName/$projectName/Main.java
 cat > $mainFile << EOF
-package eu.ciechanowiec.$2;
+package $firstLevelPackageName.$secondLevelPackageName.$projectName;
 
 import org.tinylog.Logger;
 
 /**
- * @author $3 $4
+ * @author $gitCommitterName $gitCommitterSurname
  */
 class Main {
 
@@ -127,9 +137,13 @@ printf "\e[1;96m[STATUS]:\e[0m Default logger properties has been added to \e[3m
 }
 
 insertContentToMainTest () {
-mainTestFile=$1/src/test/java/eu/ciechanowiec/$2/MainTest.java
+projectDirectory=$1
+firstLevelPackageName=$2
+secondLevelPackageName=$3
+projectName=$4
+mainTestFile=$projectDirectory/src/test/java/$firstLevelPackageName/$secondLevelPackageName/$projectName/MainTest.java
 cat > $mainTestFile << EOF
-package eu.ciechanowiec.$2;
+package $firstLevelPackageName.$secondLevelPackageName.$projectName;
 
 import org.testng.annotations.Test;
 
@@ -147,8 +161,12 @@ printf "\e[1;96m[STATUS]:\e[0m Default TestNG-content has been added to \e[3mMai
 }
 
 insertContentToPom () {
-pomFile=$1/pom.xml
-projectName=$2
+projectDirectory=$1
+firstLevelPackageName=$2
+secondLevelPackageName=$3
+projectName=$4
+projectURL=$5
+pomFile=$projectDirectory/pom.xml
 cat > $pomFile << EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -156,14 +174,14 @@ cat > $pomFile << EOF
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>eu.ciechanowiec.$projectName</groupId>
+  <groupId>$firstLevelPackageName.$secondLevelPackageName.$projectName</groupId>
   <artifactId>$projectName</artifactId>
   <version>1.0</version>
   <packaging>jar</packaging>
 
   <name>$projectName</name>
   <description>Java Program</description>
-  <url>https://ciechanowiec.eu/</url>
+  <url>$projectURL</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -240,7 +258,7 @@ cat > $pomFile << EOF
               <addClasspath>true</addClasspath>
 	          <classpathPrefix>lib/</classpathPrefix> <!-- enables usage of dependencies from .jar
                                                            by copying them into the target folder -->
-              <mainClass>eu.ciechanowiec.$projectName.Main</mainClass>
+              <mainClass>$firstLevelPackageName.$secondLevelPackageName.$projectName.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
@@ -317,8 +335,9 @@ printf "\e[1;96m[STATUS]:\e[0m Default Readme-content has been added to \e[3mREA
 }
 
 addGitignore () {
-touch $1/.gitignore
-gitignoreFile=$1/.gitignore
+projectDirectory=$1
+touch $projectDirectory/.gitignore
+gitignoreFile=$projectDirectory/.gitignore
 cat > $gitignoreFile << EOF
 # All files with .class extension:
 *.class
@@ -345,9 +364,10 @@ printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitignore\e[0m has been created. It sets gi
 	     except \e[3m.git\e[0m, \e[3m.gitattributes\e[0m and \e[3m.gitignore\e[0m\n"
 }
 
-addGitattributes () {
-touch $1/.gitattributes
-gitattributesFile=$1/.gitattributes
+addGitAttributes () {
+projectDirectory=$1
+touch $projectDirectory/.gitattributes
+gitattributesFile=$projectDirectory/.gitattributes
 cat > $gitattributesFile << EOF
 ###############################
 #        Line Endings         #
@@ -375,11 +395,15 @@ initGit () {
 }
 
 setupGitCommitter() {
+  projectDirectory=$1
+  gitCommitterName=$2
+  gitCommitterSurname=$3
+  gitCommitterEmail=$4
 	currentDirectory=`pwd`
-	cd $1
-	git config user.name "$2 $3"
-	git config user.email $4
-	printf "\e[1;96m[STATUS]:\e[0m Git committer fot this project has been set up: $2 $3 <$4>.\n"
+	cd $projectDirectory
+	git config user.name "$gitCommitterName $gitCommitterSurname"
+	git config user.email $gitCommitterEmail
+	printf "\e[1;96m[STATUS]:\e[0m Git committer fot this project has been set up: $gitCommitterName $gitCommitterSurname <$gitCommitterEmail>.\n"
 	cd $currentDirectory
 }
 
@@ -426,6 +450,9 @@ verifyIfGitExists
 gitCommitterName="Herman"
 gitCommitterSurname="Ciechanowiec"
 gitCommitterEmail="herman@ciechanowiec.eu"
+firstLevelPackageName="eu"
+secondLevelPackageName="ciechanowiec"
+projectURL="https://ciechanowiec.eu/"
 # << END OF A CONFIGURABLE BLOCK
 
 # >> START OF A CONFIGURABLE BLOCK
@@ -442,15 +469,15 @@ gitCommitterEmail="herman@ciechanowiec.eu"
 #    from the comment the second one and provide your own value for the variable
 #    'pathUntilProjectDirectory' inside that second set.
 # FIRST SET:
-#verifyIfTwoArguments $@
-#pathUntilProjectDirectory=$1
-#projectName=$2
-#projectDirectory=$1/$2
+verifyIfTwoArguments $@
+pathUntilProjectDirectory=$1
+projectName=$2
+projectDirectory=$1/$2
 # SECOND SET:
-verifyIfOneArgument $@
-pathUntilProjectDirectory="/home/herman/MyDrive/2_prog/" # change the value of this variable
-projectName=$1
-projectDirectory=$pathUntilProjectDirectory/$1
+#verifyIfOneArgument $@
+#pathUntilProjectDirectory="/home/herman/MyDrive/2_prog/" # change the value of this variable
+#projectName=$1
+#projectDirectory=$pathUntilProjectDirectory/$1
 # << END OF A CONFIGURABLE BLOCK
 
 projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'` # replace possible double // with single /
@@ -459,14 +486,14 @@ verifyIfCorrectPath $pathUntilProjectDirectory
 verifyIfCorrectName $projectName
 verifyIfProjectDirectoryExists $projectDirectory
 createProjectDirectory $projectDirectory
-createFileStructure $projectDirectory $projectName
-insertContentToMain $projectDirectory $projectName $gitCommitterName $gitCommitterSurname
+createFilesStructure $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName
+insertContentToMain $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName $gitCommitterName $gitCommitterSurname
 insertContentToLoggerProperties $projectDirectory
-insertContentToMainTest $projectDirectory $projectName
-insertContentToPom $projectDirectory $projectName
+insertContentToMainTest $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName
+insertContentToPom $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName $projectURL
 insertContentToReadme $projectDirectory $projectName
 addGitignore $projectDirectory
-addGitattributes $projectDirectory
+addGitAttributes $projectDirectory
 initGit $projectDirectory
 setupGitCommitter $projectDirectory $gitCommitterName $gitCommitterSurname $gitCommitterEmail
 showFinishMessage $projectName
@@ -478,7 +505,7 @@ showFinishMessage $projectName
 # B. By default the described options are disabled by commenting out
 #    the functions 'tryOpenWithIntelliJ' and 'tryOpenWithVSCode'. To enable one
 #    of that options restore an appropriate function from the comment.
-tryOpenWithIntelliJ $projectName $projectDirectory
+#tryOpenWithIntelliJ $projectName $projectDirectory
 #tryOpenWithVSCode $projectName $projectDirectory
 # << END OF A CONFIGURABLE BLOCK
 

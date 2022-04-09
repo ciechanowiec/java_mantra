@@ -3,11 +3,10 @@
 ## Table of Contents
 1. [Basic Info](#Basic-Info)
 2. [Prerequisites] (#Prerequisites)
-3. [How to Use](#How-to-Use)
-4. [Script's Algorithm](#Scripts-Algorithm)
-5. [Alias] (#Alias)
-6. [Screenshots](#Screenshots)
-7. [License](#License)
+3. [Script's Algorithm](#Scripts-Algorithm)
+4. [How to Use](#How-to-Use)
+5. [Screenshots](#Screenshots)
+6. [License](#License)
 
 ## Basic Info
 This program is a Shell script for Linux Ubuntu. Its purpose is to provide an easy-to-use and convenient tool for creating a Java project from a template with basic dependencies and configuration out of the box (Maven, Git, TestNG etc.).
@@ -38,7 +37,7 @@ The script is executed according to the following algorithm:
 2.3. exactly one or two arguments were provided (exact number of required arguments depends on configuration, by default two are required):<br/>
 2.3.1. an absolute path where the project directory is to be created (if this argument is required by configuration)<br/>
 2.3.2. a project name<br/>
-2.4. the absolute path where the project directory is to be created (the path passed to the command or set globally during the configuration) is correct<br/>
+2.4. the absolute path where the project directory is to be created (the path passed to the command or hardcoded during the configuration) is correct<br/>
 2.5. the provided project name is correct (should consist only of lower case letters and numbers; the first character should be a letter)<br/>
 2.6. the project directory hasn’t existed yet<br/>
 3\. Create the project directory (name of the project directory is the project name)<br/>
@@ -82,20 +81,13 @@ The above file structure implements the default file structure used by maven-arc
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed
-2. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are ==== blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `# << END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks.  
+2. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks
 3. Put the script file (`.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
 4. Give the script a permission to be run (`chmod 755 ~/.mantra.sh`)
 5. Set up the following alias for the terminal (on Linux Ubuntu aliases are usually specified in the hidden file `~/.bashrc`):<br>
-   `alias idea='~/.mantra.sh'`
+   `alias mantra='~/.mantra.sh'`
 6. Restart all instances of the terminal
-7. Now the Mantra can be run by invoking the `mantra` command
-
-## Alias
-To make the script work with IntelliJ IDEA and to easily refer to it, appropriate aliases for Bash console are required. The way of setting up those aliases depends on the machine, but in some cases it may be achieved by adding the following code to the hidden file _.bashrc_ located in the home directory:
-```
-alias mantra='~/mantra/mantra.sh' #location of the mantra script
-alias idea='nohup /snap/intellij-idea-community/current/bin/idea.sh 2>/dev/null &' #location of the IntelliJ IDEA starter
-```
+7. Now Mantra can be run by invoking the `mantra` command
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

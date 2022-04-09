@@ -81,8 +81,8 @@ The above file structure implements the default file structure used by maven-arc
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed
-2. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks
-3. Put the script (file `.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
+2. Put the script (file `.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
+3. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks
 4. Give the script a permission to be run (`chmod 755 ~/.mantra.sh`)
 5. Set up the following alias for the terminal (on Linux Ubuntu aliases are usually specified in the hidden file `~/.bashrc`):<br>
    `alias mantra='~/.mantra.sh'`

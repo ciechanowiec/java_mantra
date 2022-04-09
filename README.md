@@ -2,7 +2,7 @@
 
 ## Table of Contents
 1. [Basic Info](#Basic-Info)
-2. [Prerequisites] (#Prerequisites)
+2. [Prerequisites](#Prerequisites)
 3. [Script's Algorithm](#Scripts-Algorithm)
 4. [How to Use](#How-to-Use)
 5. [Screenshots](#Screenshots)

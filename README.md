@@ -77,7 +77,7 @@ The above file structure implements the default file structure used by maven-arc
 12\. Initialize git repository in the project directory<br/>
 13\. Set up git committer<br/>
 14\. Show finish message on successful project creation<br/>
-15\. Propose to open the project directory in the new window with IntelliJ IDEA Community or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
+15\. Open the project directory in the new window with IntelliJ IDEA Community or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed

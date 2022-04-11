@@ -417,10 +417,8 @@ tryOpenWithVSCode () {
 	projectDirectory=$2
 	if command code -v &> /dev/null # Checks whether VS Code CLI command ('code') exists
 	then
-		printf "\e[1;93m[VS Code]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
+		printf "\e[1;93m[VS Code]:\e[0m Opening the project...\n"
 		code -n $projectDirectory
-		sleep 13      # Let the terminal have time to open VS Code
-		kill -9 $PPID # Kill the terminal after opening VS Code
 	fi
 }
 
@@ -429,10 +427,8 @@ tryOpenWithIntelliJ () {
 	projectDirectory=$2
 	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
 	then
-		printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project... The terminal will be automatically closed in a moment.\n"
+		printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project...\n"
 		nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
-		sleep 13      # Let the terminal have time to open IntelliJ IDEA Community
-		kill -9 $PPID # Kill the terminal after opening IntelliJ IDEA Community
 	fi
 }
 

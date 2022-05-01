@@ -131,7 +131,7 @@ loggerPropertiesFile=$1/src/main/resources/tinylog.properties
 cat > $loggerPropertiesFile << EOF
 writer        = file
 writer.format = {date: yyyy-MM-dd HH:mm:ss.SSS O} {level}: {message}
-writer.file   = logs.txt	
+writer.file   = logs.txt
 EOF
 printf "\e[1;96m[STATUS]:\e[0m Default logger properties has been added to \e[3mtinylog.properties\e[0m.\n" 
 }

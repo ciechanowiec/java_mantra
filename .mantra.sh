@@ -133,7 +133,7 @@ writer        = file
 writer.format = {date: yyyy-MM-dd HH:mm:ss.SSS O} {level}: {message}
 writer.file   = logs.txt
 EOF
-printf "\e[1;96m[STATUS]:\e[0m Default logger properties has been added to \e[3mtinylog.properties\e[0m.\n" 
+printf "\e[1;96m[STATUS]:\e[0m Default logger properties have been added to \e[3mtinylog.properties\e[0m.\n"
 }
 
 insertContentToMainTest () {
@@ -331,7 +331,7 @@ cat > $readmeFile << EOF
 
 This project was created on $date from a template.
 EOF
-printf "\e[1;96m[STATUS]:\e[0m Default Readme-content has been added to \e[3mREADME.md\e[0m.\n"
+printf "\e[1;96m[STATUS]:\e[0m Default readme-content has been added to \e[3mREADME.md\e[0m.\n"
 }
 
 addGitignore () {
@@ -506,4 +506,3 @@ showFinishMessage $projectName
 # << END OF A CONFIGURABLE BLOCK
 
 echo
-

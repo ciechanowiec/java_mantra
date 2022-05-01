@@ -67,7 +67,7 @@ The above file structure implements the default file structure used by maven-arc
 6\. Add default logger properties to `tinylog.properties` (logging to a file)<br/>
 7\. Add default TestNG-content to `MainTest.java` (_TestNG_ `assertTrue` test which always passes)<br/>
 8\. Add default Maven-content to `pom.xml`<br/>
-9\. Add default content do `README.md` (the project name and date of creation)<br/>
+9\. Add default content to `README.md` (the project name and date of creation)<br/>
 10\. Add `.gitignore` file which sets git to ignore:<br/>
 10.1. all files with `.class` extension<br/>
 10.2. all files with `.log` extension + file named `logs.txt`<br/>

@@ -68,11 +68,7 @@ The above file structure implements the default file structure used by maven-arc
 7\. Add default TestNG-content to `MainTest.java` (_TestNG_ `assertTrue` test which always passes)<br/>
 8\. Add default Maven-content to `pom.xml`<br/>
 9\. Add default content to `README.md` (the project name and date of creation)<br/>
-10\. Add `.gitignore` file which sets git to ignore:<br/>
-10.1. all files with `.class` extension<br/>
-10.2. all files with `.log` extension + file named `logs.txt`<br/>
-10.4. `target` directory located directly in the project directory<br/>
-10.5. all files and directories which names start with `.` (dot), except `.git`, `.gitattributes` and `.gitignore`<br/>
+10\. Add `.gitignore` file with standard content
 11\. Add `.gitattributes` file which normalizes line endings<br/>
 12\. Initialize git repository in the project directory<br/>
 13\. Set up git committer<br/>

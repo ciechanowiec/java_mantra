@@ -339,8 +339,9 @@ projectDirectory=$1
 touch $projectDirectory/.gitignore
 gitignoreFile=$projectDirectory/.gitignore
 cat > $gitignoreFile << EOF
-# All files with .class extension:
+# All files with .class and .iml extension:
 *.class
+*.iml
 
 # All files with .log extension + file named 'logs.txt':
 *.log
@@ -349,19 +350,15 @@ logs.txt
 # 'target' directory located directly in the project directory:
 /target
 
-# All files and directories which names start with . (dot), 
-# except .git, .gitattributes and .gitignore:
+# All files and directories which names start with . (dot),
+# except .git, .github, .gitattributes and .gitignore:
 .*
 !/.git
+!/.github
 !.gitattributes
 !.gitignore
 EOF
-printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitignore\e[0m has been created. It sets git to ignore:
-	   \055 all files with \e[3m.class\e[0m extension
-	   \055 all files with \e[3m.log\e[0m extension + file named \e[3mlogs.txt\e[0m
-	   \055 \e[3mtarget\e[0m directory located directly in the project directory
-	   \055 all files and directories which names start with \e[3m. (dot)\e[0m,
-	     except \e[3m.git\e[0m, \e[3m.gitattributes\e[0m and \e[3m.gitignore\e[0m\n"
+printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitignore\e[0m with standard content has been created.\n"
 }
 
 addGitAttributes () {
@@ -471,7 +468,7 @@ projectName=$2
 projectDirectory=$1/$2
 # SECOND SET:
 #verifyIfOneArgument $@
-#pathUntilProjectDirectory="/home/herman/MyDrive/2_prog/" # change the value of this variable
+#pathUntilProjectDirectory="/home/herman/" # change the value of this variable
 #projectName=$1
 #projectDirectory=$pathUntilProjectDirectory/$1
 # << END OF A CONFIGURABLE BLOCK

@@ -347,8 +347,8 @@ cat > $gitignoreFile << EOF
 *.log
 logs.txt
 
-# 'target' directory located directly in the project directory:
-/target
+# 'target' directories and files:
+target
 
 # All files and directories which names start with . (dot),
 # except .git, .github, .gitattributes and .gitignore:

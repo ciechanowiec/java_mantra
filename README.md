@@ -23,9 +23,10 @@ Obligatory:
 1. `tree` package from https://snapcraft.io/tree (to install it run `sudo snap install tree`)
 2. `git` package (to install it run `sudo apt install git`)
 
-Facultative (one of them, both or none):
+Facultative (one of them, all or none):
 1. IntelliJ IDEA Community
-2. Visual Studio Code
+2. IntelliJ IDEA Ultimate
+3. Visual Studio Code
 
 ## Script's Algorithm
 The script is executed according to the following algorithm:
@@ -73,7 +74,7 @@ The above file structure implements the default file structure used by maven-arc
 12\. Initialize git repository in the project directory<br/>
 13\. Set up git committer<br/>
 14\. Show finish message on successful project creation<br/>
-15\. Open the project directory in the new window with IntelliJ IDEA Community or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
+15\. Open the project directory in the new window with IntelliJ IDEA Community, IntelliJ IDEA Ultimate or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed

@@ -419,7 +419,7 @@ tryOpenWithVSCode () {
 	fi
 }
 
-tryOpenWithIntelliJ () {
+tryOpenWithIntelliJCommunity () {
 	projectName=$1
 	projectDirectory=$2
 	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
@@ -427,6 +427,16 @@ tryOpenWithIntelliJ () {
 		printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project...\n"
 		nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
 	fi
+}
+
+tryOpenWithIntelliJUltimate () {
+  projectName=$1
+  projectDirectory=$2
+  if [ -f /snap/intellij-idea-ultimate/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
+  then
+    printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project...\n"
+    nohup /snap/intellij-idea-ultimate/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
+  fi
 }
 
 # ============================================== #
@@ -493,12 +503,14 @@ showFinishMessage $projectName
 
 # >> START OF A CONFIGURABLE BLOCK
 # A. This block allows to open the project directory in the new
-#    window with IntelliJ IDEA Community ('tryOpenWithIntelliJ')
+#    window with IntelliJ IDEA Community ('tryOpenWithIntelliJCommunity'),
+#    IntelliJ IDEA Ultimate ('tryOpenWithIntelliJUltimate')
 #    or Visual Studio Code ('tryOpenWithVSCode') if installed.
 # B. By default the described options are disabled by commenting out
-#    the functions 'tryOpenWithIntelliJ' and 'tryOpenWithVSCode'. To enable one
+#    the functions 'tryOpenWithIntelliJCommunity' and 'tryOpenWithVSCode'. To enable one
 #    of that options restore an appropriate function from the comment.
-#tryOpenWithIntelliJ $projectName $projectDirectory
+#tryOpenWithIntelliJCommunity $projectName $projectDirectory
+#tryOpenWithIntelliJUltimate $projectName $projectDirectory
 #tryOpenWithVSCode $projectName $projectDirectory
 # << END OF A CONFIGURABLE BLOCK
 

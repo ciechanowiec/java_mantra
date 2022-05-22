@@ -53,8 +53,10 @@ The script is executed according to the following algorithm:
     │   │   └── eu
     │   │       └── ciechanowiec
     │   │           └── colibriproject
-    │   │               └── Main.java
+    │   │               ├── Main.java
+    │   │               └── SamplePrinter.java
     │   └── resources
+    │       ├── sampleLines.txt
     │       └── tinylog.properties
     └── test
         └── java
@@ -64,27 +66,20 @@ The script is executed according to the following algorithm:
                         └── MainTest.java
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
-5\. Add default Java-content to `Main.java` (`main` method which prints `Hello, Universe!` + logging)<br/>
-6\. Add default logger properties to `tinylog.properties` (logging to a file)<br/>
-7\. Add default TestNG-content to `MainTest.java` (_TestNG_ `assertTrue` test which always passes)<br/>
-8\. Add default Maven-content to `pom.xml`<br/>
-9\. Add default content to `README.md` (the project name and date of creation)<br/>
-10\. Add `.gitignore` file with standard content
-11\. Add `.gitattributes` file which normalizes line endings<br/>
-12\. Initialize git repository in the project directory<br/>
-13\. Set up git committer<br/>
-14\. Show finish message on successful project creation<br/>
-15\. Open the project directory in the new window with IntelliJ IDEA Community, IntelliJ IDEA Ultimate or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
+4\. Add default content to project files
+5\. Initialize git repository in the project directory<br/>
+6\. Set up git committer<br/>
+7\. Open the project directory in the new window with IntelliJ IDEA Community, IntelliJ IDEA Ultimate or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed
 2. Put the script (file `.mantra.sh`) to the home folder so that its path will be `~/.mantra.sh`
-3. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in that blocks according to the clues contained in that blocks
-4. Give the script a permission to be run (`chmod 755 ~/.mantra.sh`)
+3. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in those blocks according to the clues contained in those blocks
+4. Give the script permission to be run (`chmod 755 ~/.mantra.sh`)
 5. Set up the following alias for the terminal (on Linux Ubuntu aliases are usually specified in the hidden file `~/.bashrc`):<br>
    `alias mantra='~/.mantra.sh'`
 6. Restart all instances of the terminal
-7. Now Mantra can be run by invoking the `mantra` command
+7. Now the script can be run by invoking the `mantra` command
 
 ## Screenshots
 <kbd><img src="!presentation/1.png"></kbd><br/>

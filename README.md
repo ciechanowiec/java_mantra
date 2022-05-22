@@ -1,4 +1,4 @@
-# Mantra
+# Java Mantra
 
 ## Table of Contents
 1. [Basic Info](#Basic-Info)

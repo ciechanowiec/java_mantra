@@ -66,10 +66,10 @@ The script is executed according to the following algorithm:
                         └── MainTest.java
 ```     
 The above file structure implements the default file structure used by maven-archetype-quickstart and described at https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html (captured on March 2022)<br/>
-4\. Add default content to project files
-5\. Initialize git repository in the project directory<br/>
-6\. Set up git committer<br/>
-7\. Open the project directory in the new window with IntelliJ IDEA Community, IntelliJ IDEA Ultimate or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
+5\. Add default content to project files
+6\. Initialize git repository in the project directory<br/>
+7\. Set up git committer<br/>
+8\. Open the project directory in the new window with IntelliJ IDEA Community, IntelliJ IDEA Ultimate or Visual Studio Code if installed (this option works if it was turned on during configuration, by default it is turned off)
 
 ## How to Use
 1. Make sure that prerequisites listed above are installed

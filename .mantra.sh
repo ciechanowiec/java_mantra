@@ -522,16 +522,15 @@ projectURL="https://ciechanowiec.eu/"
 #    from the comment the second one and provide your own value for the variable
 #    'pathUntilProjectDirectory' inside that second set.
 # FIRST SET:
-#verifyIfTwoArguments $@
-#pathUntilProjectDirectory=$1
-#projectName=$2
-#projectDirectory=$1/$2
+verifyIfTwoArguments $@
+pathUntilProjectDirectory=$1
+projectName=$2
+projectDirectory=$1/$2
 # SECOND SET:
-verifyIfOneArgument $@
+#verifyIfOneArgument $@
 #pathUntilProjectDirectory="/home/herman/" # change the value of this variable
-pathUntilProjectDirectory="/home/herman/0_prog" # change the value of this variable
-projectName=$1
-projectDirectory=$pathUntilProjectDirectory/$1
+#projectName=$1
+#projectDirectory=$pathUntilProjectDirectory/$1
 # << END OF A CONFIGURABLE BLOCK
 
 projectDirectory=`echo $projectDirectory | sed 's/\/\//\//g'` # replace possible double // with single /
@@ -563,7 +562,7 @@ showFinishMessage $projectName
 #    the functions 'tryOpenWithIntelliJCommunity' and 'tryOpenWithVSCode'. To enable one
 #    of that options restore an appropriate function from the comment.
 #tryOpenWithIntelliJCommunity $projectName $projectDirectory
-tryOpenWithIntelliJUltimate $projectName $projectDirectory
+#tryOpenWithIntelliJUltimate $projectName $projectDirectory
 #tryOpenWithVSCode $projectName $projectDirectory
 # << END OF A CONFIGURABLE BLOCK
 

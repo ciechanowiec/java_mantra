@@ -475,7 +475,7 @@ tryOpenWithIntelliJCommunity () {
 	if [ -f /snap/intellij-idea-community/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
 	then
 		printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project...\n"
-		nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
+		nohup /snap/intellij-idea-community/current/bin/idea.sh nosplash $projectDirectory > /dev/null 2>&1 &
 	fi
 }
 
@@ -485,7 +485,7 @@ tryOpenWithIntelliJUltimate () {
   if [ -f /snap/intellij-idea-ultimate/current/bin/idea.sh ] # Checks whether a native IntelliJ IDEA launcher exists
   then
     printf "\e[1;93m[IntelliJ IDEA]:\e[0m Opening the project...\n"
-    nohup /snap/intellij-idea-ultimate/current/bin/idea.sh nosplash $projectDirectory 2>/dev/null &
+    nohup /snap/intellij-idea-ultimate/current/bin/idea.sh nosplash $projectDirectory > /dev/null 2>&1 &
   fi
 }
 

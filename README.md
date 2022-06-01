@@ -77,7 +77,7 @@ The above file structure implements the default file structure used by maven-arc
 3. At the end of the script (file `.mantra.sh`), after the comment-banner `DRIVER CODE`, there are 3 blocks of code encapsulated inside the pair-comments `>> START OF A CONFIGURABLE BLOCK` and `<< END OF A CONFIGURABLE BLOCK`. Configure the code in those blocks according to the clues contained in those blocks
 4. Give the script permission to be run (`chmod 755 ~/.mantra.sh`)
 5. Set up the following alias for the terminal (on Linux Ubuntu aliases are usually specified in the hidden file `~/.bashrc`):<br>
-   `alias mantra='~/.mantra.sh'`
+   `alias mantra='~/.mantra.sh'`<br>
 6. Restart all instances of the terminal
 7. Now the script can be run by invoking the `mantra` command
 

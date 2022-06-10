@@ -280,7 +280,7 @@ cat > $pomFile << EOF
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
+      <version>\${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>

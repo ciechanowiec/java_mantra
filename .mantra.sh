@@ -95,7 +95,7 @@ projectName=$4
 	touch $1/src/main/resources/sampleLines.txt
 	touch $1/src/test/java/$firstLevelPackageName/$secondLevelPackageName/$projectName/MainTest.java
 	touch $1/pom.xml
-	touch $1/README.md
+	touch $1/README.adoc
 	printf "\e[1;96m[STATUS]:\e[0m The following file structure for the project has been created:\n"
 	tree $1
 }
@@ -380,15 +380,29 @@ printf "\e[1;96m[STATUS]:\e[0m Default Maven-content has been added to \e[3mpom.
 }
 
 insertContentToReadme () {
-readmeFile=$1/README.md
+readmeFile=$1/README.adoc
 projectName=$2
+gitCommitterName=$3
+gitCommitterSurname=$4
+gitCommitterEmail=$5
 date=`date +%F`
 cat > $readmeFile << EOF
-# $projectName
+= $projectName
+:reproducible:
+:doctype: article
+:author: $gitCommitterName $gitCommitterSurname
+:email: $gitCommitterEmail
+:chapter-signifier:
+:sectnums:
+:sectnumlevels: 5
+:sectanchors:
+:toc: left
+:toclevels: 5
+:icons: font
 
 This project was created on $date from a template.
 EOF
-printf "\e[1;96m[STATUS]:\e[0m Default readme-content has been added to \e[3mREADME.md\e[0m.\n"
+printf "\e[1;96m[STATUS]:\e[0m Default readme-content has been added to \e[3mREADME.adoc\e[0m.\n"
 }
 
 addGitignore () {
@@ -553,7 +567,7 @@ insertContentToSampleLines $projectDirectory
 insertContentToLoggerProperties $projectDirectory
 insertContentToMainTest $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName
 insertContentToPom $projectDirectory $firstLevelPackageName $secondLevelPackageName $projectName $projectURL
-insertContentToReadme $projectDirectory $projectName
+insertContentToReadme $projectDirectory $projectName $gitCommitterName $gitCommitterSurname $gitCommitterEmail
 addGitignore $projectDirectory
 addGitAttributes $projectDirectory
 initGit $projectDirectory

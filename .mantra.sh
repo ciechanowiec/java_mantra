@@ -264,6 +264,7 @@ cat > $pomFile << EOF
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
     <!--  dependencies  -->
+    <lombok.version>1.18.24</lombok.version>
     <testng.version>7.6.0</testng.version>
     <tinylog-api.version>2.5.0-M1.1</tinylog-api.version>
     <tinylog-impl.version>2.5.0-M1.1</tinylog-impl.version>
@@ -276,6 +277,12 @@ cat > $pomFile << EOF
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>

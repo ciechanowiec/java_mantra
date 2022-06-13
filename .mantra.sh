@@ -410,24 +410,12 @@ projectDirectory=$1
 touch $projectDirectory/.gitignore
 gitignoreFile=$projectDirectory/.gitignore
 cat > $gitignoreFile << EOF
-# All files with .class and .iml extension:
 *.class
 *.iml
-
-# All files with .log extension + file named 'logs.txt':
 *.log
-logs.txt
-
-# 'target' directories and files:
+.idea
+.vscode
 target
-
-# All files and directories which names start with . (dot),
-# except .git, .github, .gitattributes and .gitignore:
-.*
-!/.git
-!/.github
-!.gitattributes
-!.gitignore
 EOF
 printf "\e[1;96m[STATUS]:\e[0m \e[3m.gitignore\e[0m with standard content has been created.\n"
 }
